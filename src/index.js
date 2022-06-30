@@ -39,10 +39,6 @@ function displayWeatherCondition(response) {
   );
 }
 
-let dateElement = document.querySelector("#date");
-let currentTime = new Date();
-dateElement.innerHTML = formatDate(currentTime);
-
 function searchCity(city) {
   let apiKey = "958974901cf1ec32303b593f9d980eaa";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
