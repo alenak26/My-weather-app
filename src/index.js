@@ -25,6 +25,9 @@ function formatDate(timestamp) {
 
 function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
+
+  celsiusTemperature = Math.round(response.data.main.temp);
+
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.main.temp
   );
@@ -70,17 +73,26 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-// function convertToFahrenheit(event) {
-//   event.preventDefault();
-//   let temperatureElement = document.querySelector("#temperature");
-//   temperatureElement.innerHTML = 66;
-// }
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
-// function convertToCelsius(event) {
-//   event.preventDefault();
-//   let temperatureElement = document.querySelector("#temperature");
-//   temperatureElement.innerHTML = 19;
-// }
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
